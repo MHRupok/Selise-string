@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selise</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card text-center" style="margin-top: 200px;">
+            <div class="card-header">
+                Largest consecutive repeating character
+                parts
+            </div>
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Give your string"
+                        aria-label="Recipient's username" aria-describedby="basic-addon2" id="stringInput">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="submit"
+                            onclick="longest()">Compute</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span>Output: <span id="output"></span></span>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var temp = document.getElementById("stringInput");
+
+    function longest() {
+        str = temp.value;
+        let longest = '';
+        let cache = '';
+        if (str.length === 0) {
+            return 0;
+        }
+
+        for (let i = 0; i < str.length; i++) {
+            if (i === 0) {
+                if (str[i] === str[i + 1]) {
+                    cache += str[i];
+                }
+            }
+            if (i > 0) {
+                if (str[i] === str[i - 1]) {
+                    cache += str[i];
+                }
+                if (str[i] !== str[i - 1]) {
+                    cache = str[i];
+                }
+                if (cache.length > longest.length) {
+                    longest = cache;
+                }
+            }
+        }
+        console.log(longest);
+        document.getElementById('output').innerHTML = longest;
+
+    }
+</script>
+
+</html>
